@@ -54,8 +54,8 @@ light.shadow.camera.bottom = -200;
 
 scene.add(light);
 
-light = new THREE.AmbientLight(0x404040);
-scene.add(light);
+const lighta = new THREE.AmbientLight(0x404040);
+scene.add(lighta);
 
 scene.fog = new THREE.Fog( 0xcccccc, 10, 100 );
 
