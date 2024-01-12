@@ -33,7 +33,7 @@ const axesHelper = new THREE.AxesHelper( 5 );
 scene.add( axesHelper );
 // scene.add( cube );
 
-const light = new THREE.AmbientLight(0xffffff);
+const light = new THREE.AmbientLight(0xffffff, 0.57);
 scene.add(light);
 
 
