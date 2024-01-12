@@ -36,7 +36,9 @@ const axesHelper = new THREE.AxesHelper( 5 );
 scene.add( axesHelper );
 // scene.add( cube );
 
-const light = new THREE.AmbientLight(0xffffff);
+const light = new THREE.RectAreaLight(0xffffff,1.0, 5.0,10.0);
+light.position.set(0,10,0);
+light.lookAt(0,0,0);
 scene.add(light);
 
 
