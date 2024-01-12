@@ -33,8 +33,17 @@ const axesHelper = new THREE.AxesHelper( 5 );
 scene.add( axesHelper );
 // scene.add( cube );
 
-const light = new THREE.AmbientLight(0xffffff);
-scene.add(light);
+const ambientLight = new HemisphereLight(
+    'white', // bright sky color
+    'darkslategrey', // dim ground color
+    5, // intensity
+  );
+
+const mainLight = new DirectionalLight('white', 5);
+mainLight.position.set(10, 10, 10);
+
+scene.add(ambientLight);
+scene.add(mainLight);
 
 camera.position.z = 5;
 controls.update();
