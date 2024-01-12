@@ -33,9 +33,8 @@ const axesHelper = new THREE.AxesHelper( 5 );
 scene.add( axesHelper );
 // scene.add( cube );
 
-const light = new THREE.PointLight( 0xffffff, 1, 100 );
-light.position.set( 50, 50, 50 );
-scene.add( light );
+const light = new THREE.AmbientLight(0xffffff);
+scene.add(light);
 
 camera.position.z = 5;
 controls.update();
