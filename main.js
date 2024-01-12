@@ -11,8 +11,10 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize( window.innerWidth, window.innerHeight );
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 0.3;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+// renderer.toneMapping = THREE.ACESFilmicToneMapping;
+// renderer.toneMappingExposure = 0.3;
 
 document.body.appendChild( renderer.domElement );
 const controls = new OrbitControls( camera, renderer.domElement );
@@ -36,9 +38,20 @@ const axesHelper = new THREE.AxesHelper( 5 );
 scene.add( axesHelper );
 // scene.add( cube );
 
-const light = new THREE.RectAreaLight(0xffffff,1.0, 5.0,10.0);
-light.position.set(0,10,0);
-light.lookAt(0,0,0);
+const light = new THREE.DirectionalLight(0xffffff,1.0, 5.0,10.0);
+light.position.set(100,100,100);
+light.target.position.set(0,0,0);
+light.castShadow = true;
+light.shadow.bias = -0.01;
+light.shadow.mapSize.width = 2048;
+light.shadow.mapSize.height = 2048;
+light.shadow.camera.near = 1.0;
+light.shadow.camera.far = 500;
+light.shadow.camera.left = 200;
+light.shadow.camera.right = -200;
+light.shadow.camera.top = 200;
+light.shadow.camera.bottom = -200;
+
 scene.add(light);
 
 
