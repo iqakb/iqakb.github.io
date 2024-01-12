@@ -4,8 +4,8 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 
 const scene = new THREE.Scene();
-// const color3 = new THREE.Color(0xffc000);
-// scene.background = color3;
+const color3 = new THREE.Color(0xffc000);
+scene.background = color3;
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
 
