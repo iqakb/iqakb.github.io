@@ -33,7 +33,7 @@ const axesHelper = new THREE.AxesHelper( 5 );
 scene.add( axesHelper );
 // scene.add( cube );
 
-const light = new THREE.PointLight( 0xff0000, 1, 10 );
+const light = new THREE.PointLight(0xffffff, 1, 100);
 light.position.set( 50, 50, 50 );
 scene.add( light );
 
