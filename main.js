@@ -37,7 +37,7 @@ const light = new THREE.AmbientLight(0xffffff);
 scene.add(light);
 
 
-scene.fog = new THREE.Fog( 0xcccccc, 1, 1000 );
+scene.fog = new THREE.Fog( 0xcccccc, 10, 100 );
 
 
 camera.position.z = 5;
