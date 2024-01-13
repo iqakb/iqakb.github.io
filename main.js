@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { GUI } from 'dat.gui';
+import * as dat from 'dat.gui';
+
 
 const scene = new THREE.Scene();
 const color3 = new THREE.Color(0xffc000);
