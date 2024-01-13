@@ -32,7 +32,7 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
     model = gltf.scene;
 	scene.add( model );
     curquaternion.copy(model.quaternion);
-    const cubeFolder = gui.addFolder('versor')
+    const cubeFolder = gui.addFolder('euler')
     let preset = {};
 
     const obj = {
@@ -54,9 +54,9 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
         }
     }
 
-    cubeFolder.add( obj, 'x' );
-    cubeFolder.add( obj, 'y' );
-    cubeFolder.add( obj, 'z' );
+    cubeFolder.add( obj, 'x',0 ,Math.PI * 2);
+    cubeFolder.add( obj, 'y',0,Math.PI * 2);
+    cubeFolder.add( obj, 'z',0,Math.PI * 2);
 
     cubeFolder.add( obj, 'savePreset' );
 
