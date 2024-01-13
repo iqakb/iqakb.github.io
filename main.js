@@ -58,6 +58,9 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
         versor.setFromEuler(euler);
         console.log(versor);
         curquaternion.multiplyQuaternions(versor,curquaternion);
+        console.log("model");
+        console.log(model.quaternion);
+        console.log("curquaternion");
         console.log(curquaternion);
         model.quaternion.slerp(curquaternion,0.1);
     } );
