@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import * as dat from 'dat.gui';
+// import * as dat from 'dat.gui';
 
 
 const scene = new THREE.Scene();
@@ -66,15 +66,15 @@ scene.fog = new THREE.Fog( 0xcccccc, 10, 30 );
 camera.position.z = 5;
 controls.update();
 
-const gui = new dat.GUI();
-const cubeFolder = gui.addFolder('drone');
-cubeFolder.add(model.rotation, 'x', 0, Math.PI * 2);
-cubeFolder.add(model.rotation, 'y', 0, Math.PI * 2);
-cubeFolder.add(model.rotation, 'z', 0, Math.PI * 2);
-cubeFolder.open();
-const cameraFolder = gui.addFolder('Camera');
-cameraFolder.add(camera.position, 'z', 0, 10);
-cameraFolder.open();
+// const gui = new dat.GUI();
+// const cubeFolder = gui.addFolder('drone');
+// cubeFolder.add(model.rotation, 'x', 0, Math.PI * 2);
+// cubeFolder.add(model.rotation, 'y', 0, Math.PI * 2);
+// cubeFolder.add(model.rotation, 'z', 0, Math.PI * 2);
+// cubeFolder.open();
+// const cameraFolder = gui.addFolder('Camera');
+// cameraFolder.add(camera.position, 'z', 0, 10);
+// cameraFolder.open();
 
 function animate() {
 	requestAnimationFrame( animate );
