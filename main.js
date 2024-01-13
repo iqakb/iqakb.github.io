@@ -5,7 +5,7 @@ import GUI from 'https://cdn.jsdelivr.net/npm/lil-gui@0.19/+esm';
 
 
 const gui = new GUI();
-gui.add( document, 'title' );
+
 
 const scene = new THREE.Scene();
 const color3 = new THREE.Color(0xffc000);
@@ -23,16 +23,28 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild( renderer.domElement );
 const controls = new OrbitControls( camera, renderer.domElement );
 
+var model
 const loader = new GLTFLoader();
 loader.load( 's9_mini_drone.glb', function ( gltf ) {
-
-	scene.add( gltf.scene );
+    model = gltf.scene;
+	scene.add( model );
 
 }, undefined, function ( error ) {
 
 	console.error( error );
 
 } );
+
+
+const cubeFolder = gui.addFolder('Cube')
+cubeFolder.add(model.rotation, 'x', 0, Math.PI * 2)
+cubeFolder.add(model.rotation, 'y', 0, Math.PI * 2)
+cubeFolder.add(model.rotation, 'z', 0, Math.PI * 2)
+cubeFolder.open()
+const cameraFolder = gui.addFolder('Camera')
+cameraFolder.add(camera.position, 'z', 0, 10)
+cameraFolder.open()
+
 
 
 // const geometry = new THREE.BoxGeometry( 1, 1, 1 );
