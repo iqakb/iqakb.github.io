@@ -53,11 +53,13 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
     cubeFolder.add( obj, 'y',0,Math.PI * 2);
     cubeFolder.add( obj, 'z',0,Math.PI * 2);
     cubeFolder.add( obj, 'savePreset' ).onChange( () => {
-        console.log(preset.controllers.x);
         const euler = new THREE.Euler( preset.controllers.x, preset.controllers.y, preset.controllers.z, 'XYZ' );
+        console.log(euler);
         versor.setFromEuler(euler);
+        console.log(versor);
         curquaternion.multiplyQuaternions(versor,curquaternion);
-        model.quaternion.slerp(curquaternion,0.01);
+        console.log(curquaternion);
+        model.quaternion.slerp(curquaternion,0.1);
     } );
     
 
