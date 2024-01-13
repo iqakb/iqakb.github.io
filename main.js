@@ -22,15 +22,21 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 document.body.appendChild( renderer.domElement );
 const controls = new OrbitControls( camera, renderer.domElement );
-const cubeFolder = gui.addFolder('rotation')
 var model
 const loader = new GLTFLoader();
 loader.load( 's9_mini_drone.glb', function ( gltf ) {
     model = gltf.scene;
 	scene.add( model );
+    const cubeFolder = gui.addFolder('rotation')
     cubeFolder.add(model.rotation, 'x', 0, Math.PI * 2)
     cubeFolder.add(model.rotation, 'y', 0, Math.PI * 2)
     cubeFolder.add(model.rotation, 'z', 0, Math.PI * 2)
+    cubeFolder.open()
+    const orientationFolder = gui.addFolder('orientation')
+    orientationFolder.add(model.quaternion, 'x', -1, 1).listen()
+    orientationFolder.add(model.quaternion, 'y', -1, 1).listen()
+    orientationFolder.add(model.quaternion, 'z', -1, 1).listen()
+    orientationFolder.add(model.quaternion, 'w', -1, 1).listen()
     cubeFolder.open()
 
 }, undefined, function ( error ) {
