@@ -22,21 +22,55 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 document.body.appendChild( renderer.domElement );
 const controls = new OrbitControls( camera, renderer.domElement );
+
+const versor = new THREE.Quaternion();
+const curquaternion = new THREE.Quaternion();
+curquaternion.copy()
+
 var model
 const loader = new GLTFLoader();
 loader.load( 's9_mini_drone.glb', function ( gltf ) {
     model = gltf.scene;
 	scene.add( model );
-    const cubeFolder = gui.addFolder('rotation')
-    cubeFolder.add(model.rotation, 'x', 0, Math.PI * 2)
-    cubeFolder.add(model.rotation, 'y', 0, Math.PI * 2)
-    cubeFolder.add(model.rotation, 'z', 0, Math.PI * 2)
-    cubeFolder.open()
+    curquaternion.copy(model.quaternion);
+    const cubeFolder = gui.addFolder('versor')
+    let preset = {};
+
+    const obj = {
+        x: 0.0,
+        y: 0.0,
+        z: 0.0,
+        savePreset() {
+            // save current values to an object
+            preset = cubeFolder.save();
+            const euler = new THREE.Euler( x, y, z, 'XYZ' );
+            versor.setFromEuler(euler);
+            curquaternion.multiplyQuaternions(versor,curquaternion);
+            model.quaternion.slerp(curquaternion);
+
+            loadButton.enable();
+        },
+        loadPreset() {
+            cubeFolder.load( preset );
+        }
+    }
+
+    cubeFolder.add( obj, 'x' );
+    cubeFolder.add( obj, 'y' );
+    cubeFolder.add( obj, 'z' );
+
+    cubeFolder.add( obj, 'savePreset' );
+
+    const loadButton = cubeFolder.add( obj, 'loadPreset' );
+    loadButton.disable();
+
+
+    
     const orientationFolder = gui.addFolder('orientation')
-    orientationFolder.add(model.quaternion, 'x', -1, 1).listen()
-    orientationFolder.add(model.quaternion, 'y', -1, 1).listen()
-    orientationFolder.add(model.quaternion, 'z', -1, 1).listen()
-    orientationFolder.add(model.quaternion, 'w', -1, 1).listen()
+    orientationFolder.add(model.quaternion, 'w', -1, 1).listen().disable()
+    orientationFolder.add(model.quaternion, 'x', -1, 1).listen().disable()
+    orientationFolder.add(model.quaternion, 'y', -1, 1).listen().disable()
+    orientationFolder.add(model.quaternion, 'z', -1, 1).listen().disable()
     cubeFolder.open()
 
 }, undefined, function ( error ) {
