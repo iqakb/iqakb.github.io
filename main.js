@@ -3,8 +3,8 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as dat from './dat.gui'
 
-const gui = new dat.GUI();
-
+const gui = new GUI();
+gui.add( document, 'title' );
 
 const scene = new THREE.Scene();
 const color3 = new THREE.Color(0xffc000);
