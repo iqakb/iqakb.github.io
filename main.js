@@ -36,11 +36,14 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
 } );
 
 
-// const cubeFolder = gui.addFolder('Cube')
-// cubeFolder.add(model.rotation, 'x', 0, Math.PI * 2)
-// cubeFolder.add(model.rotation, 'y', 0, Math.PI * 2)
-// cubeFolder.add(model.rotation, 'z', 0, Math.PI * 2)
-// cubeFolder.open()
+const cubeFolder = gui.addFolder('rotation')
+if(model){
+    cubeFolder.add(model.rotation, 'x', 0, Math.PI * 2)
+    cubeFolder.add(model.rotation, 'y', 0, Math.PI * 2)
+    cubeFolder.add(model.rotation, 'z', 0, Math.PI * 2)
+    cubeFolder.open()
+}
+
 const cameraFolder = gui.addFolder('Camera')
 cameraFolder.add(camera.position, 'z', 0, 100)
 cameraFolder.open()
@@ -87,8 +90,6 @@ function animate() {
 
 	// cube.rotation.x += 0.01;
 	// cube.rotation.y += 0.01;
-
-    if (model) model.rotation.x += 0.01;
 
     controls.update();
 	renderer.render( scene, camera );
