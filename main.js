@@ -25,7 +25,6 @@ const controls = new OrbitControls( camera, renderer.domElement );
 
 const versor = new THREE.Quaternion();
 const curquaternion = new THREE.Quaternion();
-curquaternion.copy()
 
 var model
 const loader = new GLTFLoader();
