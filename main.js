@@ -57,7 +57,7 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
         const euler = new THREE.Euler( preset.controllers.x, preset.controllers.y, preset.controllers.z, 'XYZ' );
         versor.setFromEuler(euler);
         curquaternion.multiplyQuaternions(versor,curquaternion);
-        model.rotation.x +=0.2;
+        model.quaternion.slerp(curquaternion,0.01);
     } );
     
 
