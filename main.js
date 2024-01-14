@@ -32,7 +32,7 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
     model = gltf.scene;
 	scene.add( model );
     curquaternion.copy(model.quaternion);
-    const cubeFolder = gui.addFolder('euler')
+    const cubeFolder = gui.addFolder('Euler angles')
     let preset = {};
 
     const obj = {
@@ -43,25 +43,16 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
             // save current values to an object
             preset = cubeFolder.save();
             loadButton.enable();
-        },
-        loadPreset() {
-            cubeFolder.load( preset );
         }
     }
 
     cubeFolder.add( obj, 'x',0 ,Math.PI * 2);
     cubeFolder.add( obj, 'y',0,Math.PI * 2);
     cubeFolder.add( obj, 'z',0,Math.PI * 2);
-    const saveButton = cubeFolder.add( obj, 'savePreset' ).onChange( () => {
+    const saveButton = cubeFolder.add( obj, 'Apply rotation with euler angles' ).onChange( () => {
         const euler = new THREE.Euler( preset.controllers.x, preset.controllers.y, preset.controllers.z, 'XYZ' );
-        console.log(euler);
         versor.setFromEuler(euler);
-        console.log(versor);
         curquaternion.multiplyQuaternions(versor,curquaternion);
-        console.log("model");
-        console.log(model.quaternion);
-        console.log("curquaternion");
-        console.log(curquaternion);
 
         const animate = (t) =>{
             TWEEN.update(t);
@@ -83,39 +74,20 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
         
     } );
     
-
-    const loadButton = cubeFolder.add( obj, 'loadPreset' );
-    loadButton.disable();
-
-
-    
-    const orientationFolder = gui.addFolder('orientation')
-    orientationFolder.add(model.quaternion, 'w', -1, 1).listen().disable()
-    orientationFolder.add(model.quaternion, 'x', -1, 1).listen().disable()
-    orientationFolder.add(model.quaternion, 'y', -1, 1).listen().disable()
-    orientationFolder.add(model.quaternion, 'z', -1, 1).listen().disable()
+    const orientationFolder = gui.addFolder('Current orientation in quaternion')
+    orientationFolder.add(model.quaternion, 'w', -1, 1).listen()
+    orientationFolder.add(model.quaternion, 'x', -1, 1).listen()
+    orientationFolder.add(model.quaternion, 'y', -1, 1).listen()
+    orientationFolder.add(model.quaternion, 'z', -1, 1).listen()
     cubeFolder.open()
 
 }, undefined, function ( error ) {
-
 	console.error( error );
-
 } );
 
 
-
-const cameraFolder = gui.addFolder('Camera')
-cameraFolder.add(camera.position, 'z', 0, 100)
-cameraFolder.open()
-
-
-
-// const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-// const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-// const cube = new THREE.Mesh( geometry, material );
 const axesHelper = new THREE.AxesHelper( 5 );
 scene.add( axesHelper );
-// scene.add( cube );
 
 const light = new THREE.DirectionalLight(0xffffff,1.0, 5.0,10.0);
 light.position.set(100,100,100);
@@ -130,7 +102,6 @@ light.shadow.camera.left = 200;
 light.shadow.camera.right = -200;
 light.shadow.camera.top = 200;
 light.shadow.camera.bottom = -200;
-
 scene.add(light);
 
 const lighta = new THREE.AmbientLight(0x404040);
@@ -138,19 +109,12 @@ scene.add(lighta);
 
 scene.fog = new THREE.Fog( 0xcccccc, 10, 30 );
 
-
-camera.position.z = 5;
+camera.position.z = 15;
 controls.update();
-
-
 
 
 function animate() {
 	requestAnimationFrame( animate );
-
-	// cube.rotation.x += 0.01;
-	// cube.rotation.y += 0.01;
-
     controls.update();
 	renderer.render( scene, camera );
 }
