@@ -32,7 +32,7 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
     model = gltf.scene;
 	scene.add( model );
     curquaternion.copy(model.quaternion);
-    const cubeFolder = gui.addFolder('euler').name("Apply rotation in euler angles");
+    const cubeFolder = gui.addFolder('Apply rotation in euler angles');
     let preset = {};
 
     const obj = {
@@ -74,7 +74,7 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
     } );
     
     
-    const orientationFolder = gui.addFolder('orientation').name("Current orientation in quaternion");
+    const orientationFolder = gui.addFolder("Current orientation in quaternion");
     orientationFolder.add(model.quaternion, 'x', -1, 1).listen()
     orientationFolder.add(model.quaternion, 'y', -1, 1).listen()
     orientationFolder.add(model.quaternion, 'w', -1, 1).listen()
