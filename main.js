@@ -39,14 +39,11 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
         x: 0.0,
         y: 0.0,
         z: 0.0,
-        savePreset() {
+        apply() {
             // save current values to an object
             preset = cubeFolder.save();
             loadButton.enable();
         },
-        loadPreset() {
-            cubeFolder.load( preset );
-        }
     }
 
     cubeFolder.add( obj, 'x',0 ,Math.PI * 2);
@@ -77,9 +74,6 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
         
     } );
     
-
-    const loadButton = cubeFolder.add( obj, 'load' );
-    loadButton.disable();
     
     const orientationFolder = gui.addFolder('orientation')
     orientationFolder.add(model.quaternion, 'x', -1, 1).listen()
