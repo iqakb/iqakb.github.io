@@ -74,6 +74,7 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
             saveButton.disable();
         })
         .onStop(()=>{
+            console.log("tweening stopped");
             saveButton.enable();
         })
         .onUpdate((coords)=>{
