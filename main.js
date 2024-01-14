@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import GUI from 'https://cdn.jsdelivr.net/npm/lil-gui@0.19/+esm';
-import {TWEEN} from 'https://cdn.jsdelivr.net/npm/tweenjs@1.0.2/lib/tweenjs.min.js'
+import * as TWEEN from 'https://cdnjs.cloudflare.com/ajax/libs/tween.js/21.0.0/tween.esm.js'
 
 const gui = new GUI();
 
