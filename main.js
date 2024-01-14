@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import GUI from 'https://cdn.jsdelivr.net/npm/lil-gui@0.19/+esm';
-
+import TWEEN from 'https://cdn.jsdelivr.net/npm/tweenjs@1.0.2/+esm'
 
 const gui = new GUI();
 
@@ -62,7 +62,12 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
         console.log(model.quaternion);
         console.log("curquaternion");
         console.log(curquaternion);
-        model.quaternion.slerp(curquaternion,1);
+
+        var o = {t: 0};
+        new TWEEN.Tween(o).to({t: 1}, options.duration).onUpdate(function () {
+            model.quaternion.slerp(curquaternion,o.t);
+        }).start();
+        
     } );
     
 
