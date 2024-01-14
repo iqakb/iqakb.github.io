@@ -32,7 +32,7 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
     model = gltf.scene;
 	scene.add( model );
     curquaternion.copy(model.quaternion);
-    const cubeFolder = gui.addFolder('Euler angles')
+    const cubeFolder = gui.addFolder('euler')
     let preset = {};
 
     const obj = {
@@ -42,13 +42,17 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
         savePreset() {
             // save current values to an object
             preset = cubeFolder.save();
+            loadButton.enable();
+        },
+        loadPreset() {
+            cubeFolder.load( preset );
         }
     }
 
     cubeFolder.add( obj, 'x',0 ,Math.PI * 2);
     cubeFolder.add( obj, 'y',0,Math.PI * 2);
     cubeFolder.add( obj, 'z',0,Math.PI * 2);
-    const saveButton = cubeFolder.add( obj, 'Apply rotation with euler angles' ).onChange( () => {
+    const saveButton = cubeFolder.add( obj, 'apply' ).onChange( () => {
         const euler = new THREE.Euler( preset.controllers.x, preset.controllers.y, preset.controllers.z, 'XYZ' );
         versor.setFromEuler(euler);
         curquaternion.multiplyQuaternions(versor,curquaternion);
@@ -73,10 +77,14 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
         
     } );
     
-    const orientationFolder = gui.addFolder('Current orientation in quaternion')
-    orientationFolder.add(model.quaternion, 'w', -1, 1).listen()
+
+    const loadButton = cubeFolder.add( obj, 'load' );
+    loadButton.disable();
+    
+    const orientationFolder = gui.addFolder('orientation')
     orientationFolder.add(model.quaternion, 'x', -1, 1).listen()
     orientationFolder.add(model.quaternion, 'y', -1, 1).listen()
+    orientationFolder.add(model.quaternion, 'w', -1, 1).listen()
     orientationFolder.add(model.quaternion, 'z', -1, 1).listen()
     cubeFolder.open()
 
