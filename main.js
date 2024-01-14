@@ -69,7 +69,8 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
         } ;
         animate();
 
-        const tween = new TWEEN.Tween({x: 0}).to({x: 1}, 500).onUpdate((coords)=>{
+        const tween = new TWEEN.Tween({x: 0}).to({x: 1}, 2000).easing(TWEEN.Easing.Cubic.Out)
+        .onUpdate((coords)=>{
             model.quaternion.slerp(curquaternion,coords.x);
         });
         tween.start();
