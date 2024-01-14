@@ -75,10 +75,13 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
     
     
     const orientationFolder = gui.addFolder("Current orientation in quaternion");
-    orientationFolder.add(model.quaternion, 'x', -1, 1).listen()
+    var quatx = orientationFolder.add(model.quaternion, 'x', -1, 1).listen()
     orientationFolder.add(model.quaternion, 'y', -1, 1).listen()
     orientationFolder.add(model.quaternion, 'w', -1, 1).listen()
     orientationFolder.add(model.quaternion, 'z', -1, 1).listen()
+
+    quatx.domElement.parentElement.style.pointerEvents = 'none'
+
     cubeFolder.open()
 
 }, undefined, function ( error ) {
