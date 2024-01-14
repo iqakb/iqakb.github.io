@@ -42,7 +42,6 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
         savePreset() {
             // save current values to an object
             preset = cubeFolder.save();
-            loadButton.enable();
         }
     }
 
