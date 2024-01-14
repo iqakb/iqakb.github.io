@@ -64,7 +64,7 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
         console.log(curquaternion);
 
         var o = {t: 0};
-        new TWEEN.Tween(o).to({t: 1}, options.duration).onUpdate(function () {
+        new TWEEN.Tween(o).to({t: 1}, 500).onUpdate(function () {
             model.quaternion.slerp(curquaternion,o.t);
         }).start();
         
