@@ -52,7 +52,7 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
     cubeFolder.add( obj, 'x',0 ,Math.PI * 2);
     cubeFolder.add( obj, 'y',0,Math.PI * 2);
     cubeFolder.add( obj, 'z',0,Math.PI * 2);
-    cubeFolder.add( obj, 'savePreset' ).onChange( () => {
+    const saveButton = cubeFolder.add( obj, 'savePreset' ).onChange( () => {
         const euler = new THREE.Euler( preset.controllers.x, preset.controllers.y, preset.controllers.z, 'XYZ' );
         console.log(euler);
         versor.setFromEuler(euler);
@@ -70,6 +70,12 @@ loader.load( 's9_mini_drone.glb', function ( gltf ) {
         animate();
 
         const tween = new TWEEN.Tween({x: 0}).to({x: 1}, 2000).easing(TWEEN.Easing.Cubic.Out)
+        .onStart(()=>{
+            saveButton.disable();
+        })
+        .onEnd(()=>{
+            saveButton.enable();
+        })
         .onUpdate((coords)=>{
             model.quaternion.slerp(curquaternion,coords.x);
         });
