@@ -9,9 +9,13 @@ const gui = new GUI();
 
 const scene = new THREE.Scene();
 const color3 = new THREE.Color(0xffc000);
+
 scene.background = color3;
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 camera.up.set(0,0,1);
+THREE.Object3D.DefaultUp = new THREE.Vector3(0,0,1);
+
+
 
 
 
