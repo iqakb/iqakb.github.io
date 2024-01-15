@@ -11,6 +11,8 @@ const scene = new THREE.Scene();
 const color3 = new THREE.Color(0xffc000);
 scene.background = color3;
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+camera.up.set(0,0,1);
+
 
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -112,7 +114,7 @@ scene.add(lighta);
 
 scene.fog = new THREE.Fog( 0xcccccc, 10, 30 );
 
-camera.position.z = 15;
+camera.position.x = 15;
 controls.update();
 
 
